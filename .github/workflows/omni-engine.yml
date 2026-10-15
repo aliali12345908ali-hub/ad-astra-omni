@@ -3,7 +3,7 @@ name: Ad Astra Omni Engine
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 3 * * *'  # يعمل يومياً الساعة 3 صباحاً بالتوقيت العالمي
+    - cron: '0 3 * * *'
 
 jobs:
   run-omni:
@@ -17,7 +17,7 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Run Omni AI Master Engine
+      - name: Run Omni Apex AI Engine
         run: |
           python main.py
         env:
