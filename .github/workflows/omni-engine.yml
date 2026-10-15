@@ -1,0 +1,25 @@
+name: Ad Astra Omni Engine
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * *'  # يعمل يومياً الساعة 3 صباحاً بالتوقيت العالمي
+
+jobs:
+  run-omni:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run Omni AI Master Engine
+        run: |
+          python main.py
+        env:
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          MAIL_PASS: ${{ secrets.MAIL_PASS }}
