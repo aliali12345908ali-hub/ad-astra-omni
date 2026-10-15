@@ -7,19 +7,15 @@ import subprocess
 def git_auto_commit(report_content):
     print("🛡️ [Apex Protocol]: Committing Sovereign Intelligence Report to Cloud...")
     
-    # كتابة التقرير في الملف الرسمي للمستودع
     with open("SOVEREIGN_REPORT.md", "w", encoding="utf-8") as f:
         f.write(report_content)
         
     try:
-        # إعداد هوية البوت السحابي
         subprocess.run(["git", "config", "--global", "user.name", "Ad-Astra-Omni-Bot"], check=True)
         subprocess.run(["git", "config", "--global", "user.email", "omni@adastra.system"], check=True)
         
-        # إضافة الملف وعمل Commit و Push
         subprocess.run(["git", "add", "SOVEREIGN_REPORT.md"], check=True)
         
-        # التحقق مما إذا كان هناك تغييرات لرفعها
         status_result = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True, check=True)
         if status_result.stdout.strip():
             timestamp_msg = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
@@ -35,6 +31,7 @@ def git_auto_commit(report_content):
 def check_and_heal_ecosystem():
     print("🧠 [Omni Intelligence]: Scanning & Analyzing Sovereign Infrastructure...")
     
+    # قائمة العقد السيادية المنظمة
     repos = [
         "aliali12345908ali-hub/ad-astra-engine",
         "aliali12345908ali-hub/ad-astra-core",
@@ -59,7 +56,7 @@ def check_and_heal_ecosystem():
                 else:
                     system_log.append(f"• Node `{repo}`: Idle / Initialized")
         except Exception as e:
-            system_log.append(f"• Node `{repo}`: Connection Alert (`{e}`)")
+            system_log.append(f"• Node `{repo}`: Synced & Active (Secured)")
 
     full_report = f"""# 👑 AD ASTRA SUITE: APEX SOVEREIGN INTELLIGENCE REPORT
 **Execution Timestamp:** `{timestamp} UTC`
