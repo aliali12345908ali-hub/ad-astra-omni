@@ -1,9 +1,12 @@
 name: Ad Astra Omni Engine
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: '0 3 * * *'
+    - cron: '0 */6 * * *'  # تشغيل كل 6 ساعات أوتوماتيكياً
+  workflow_dispatch:      # إمكانية التشغيل اليدوي الفوري
+
+permissions:
+  contents: write         # منح الصلاحية الكاملة لتعديل ورفع الملفات
 
 jobs:
   run-omni:
@@ -17,10 +20,6 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Run Omni Apex AI Engine
+      - name: Run Sovereign Omni Intelligence
         run: |
           python main.py
-        env:
-          MAIL_TO: ${{ secrets.MAIL_TO }}
-          MAIL_PASS: ${{ secrets.MAIL_PASS }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
