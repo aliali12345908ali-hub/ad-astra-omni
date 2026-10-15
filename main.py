@@ -4,53 +4,43 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-def generate_ai_report():
-    timestamp = datetime.datetime.utcnow().isoformat()
-    report = f"""
-    ==================================================
-    🚀 AD ASTRA OMNI: THE APEX SOVEREIGN AI ENGINE
-    ==================================================
-    📅 Timestamp: {timestamp} UTC
-    🌐 Status: FULLY OPERATIONAL & AUTONOMOUS
-    
-    [SYSTEM ANALYTICS & CAPABILITIES]:
-    - Autonomous Cloud Orchestration: ACTIVE
-    - AI-Driven Intelligence Core: ONLINE
-    - Multi-Repo Synchronization: STABLE (Engine, Core, OS)
-    - Security & Self-Healing Protocols: ENGAGED
-    
-    "The ultimate autonomous ecosystem is now sovereign."
-    ==================================================
-    """
-    print(report)
-    return report
-
-def send_email_notification(report_content):
+def send_test_email():
     mail_to = os.environ.get("MAIL_TO")
     mail_pass = os.environ.get("MAIL_PASS")
     
     if not mail_to or not mail_pass:
-        print("⚠️ Email credentials (MAIL_TO / MAIL_PASS) not set. Skipping email notification.")
+        print("⚠️ Email credentials (MAIL_TO / MAIL_PASS) are missing in environment variables.")
         return
+
+    timestamp = datetime.datetime.utcnow().isoformat()
+    report_content = f"""
+    ==================================================
+    🚀 AD ASTRA OMNI: SOVEREIGN TEST REPORT
+    ==================================================
+    📅 Timestamp: {timestamp} UTC
+    🌐 Status: SUCCESSFUL CONNECTION TEST
+    
+    [SYSTEM MESSAGE]:
+    This is a verified test transmission from your Apex Sovereign AI Engine. All systems are fully operational, secure, and ready for autonomous operations.
+    ==================================================
+    """
 
     try:
         msg = MIMEMultipart()
         msg['From'] = mail_to
         msg['To'] = mail_to
-        msg['Subject'] = "🌟 [Ad Astra Omni] Apex Sovereign AI Status Report"
+        msg['Subject'] = "🧪 [Ad Astra Omni] Sovereign Test Email Verification"
         
         msg.attach(MIMEText(report_content, 'plain'))
         
-        # الاتصال بخادم البريد (Gmail SMTP كمثال)
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         server.login(mail_to, mail_pass)
         server.sendmail(mail_to, mail_to, msg.as_string())
         server.quit()
-        print("✅ Omni Apex Report successfully sent to your email!")
+        print("✅ Test email successfully sent to your inbox!")
     except Exception as e:
-        print(f"❌ Failed to send email: {e}")
+        print(f"❌ Failed to send test email: {e} (Note: If using Gmail, ensure you use an App Password).")
 
 if __name__ == "__main__":
-    report = generate_ai_report()
-    send_email_notification(report)
+    send_test_email()
