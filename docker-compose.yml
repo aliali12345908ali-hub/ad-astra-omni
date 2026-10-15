@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  ad-astra-omni:
+    build: .
+    container_name: ad-astra-sovereign-node
+    restart: always
+    environment:
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+    volumes:
+      - .:/app
+    command: python main.py
